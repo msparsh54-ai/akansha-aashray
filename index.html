@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Akansha & Aashray — Ring Ceremony</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Great+Vibes&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --gold:#C9A84C;--gold-l:#E8CC7A;--gold-p:#F5E6B8;
+  --cream:#FDF6E3;--bg:#0f0608;--bg2:#180c0e;--bg3:#1e1008;
+  --blush:#E8C4B8;--rose:#9B3A52;--text:rgba(253,246,227,.85);
+  --serif:'Cormorant Garamond',serif;--script:'Great Vibes',cursive;--sans:'Montserrat',sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);overflow-x:hidden}
+::selection{background:rgba(201,168,76,.25)}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--gold);border-radius:2px}
+#particles{position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.45}
+section{position:relative;z-index:1;overflow:hidden}
+
+/* ─── MUSIC PLAYER ─── */
+#yt-wrap{display:none}
+.music-btn{
+  position:fixed;bottom:24px;right:20px;z-index:999;
+  width:48px;height:48px;border-radius:50%;
+  background:linear-gradient(135deg,var(--gold),var(--gold-l));
+  border:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 20px rgba(201,168,76,.45);
+  transition:transform .25s,box-shadow .25s;
+  animation:musicPulse 2.5s ease-in-out infinite;
+}
+.music-btn:hover{transform:scale(1.1);box-shadow:0 6px 28px rgba(201,168,76,.65);animation:none}
+@keyframes musicPulse{0%,100%{box-shadow:0 4px 20px rgba(201,168,76,.4)}50%{box-shadow:0 4px 32px rgba(201,168,76,.75)}}
+.music-btn svg{width:20px;height:20px;fill:var(--bg)}
+.music-toast{
+  position:fixed;bottom:80px;right:20px;z-index:998;
+  background:rgba(26,12,8,.95);border:1px solid rgba(201,168,76,.3);
+  padding:10px 14px;font-size:10px;letter-spacing:1px;
+  color:var(--gold-p);white-space:nowrap;
+  opacity:0;transform:translateY(6px);transition:all .4s;pointer-events:none;
+}
+.music-toast.show{opacity:1;transform:translateY(0)}
+
+/* ─── HERO ─── */
+#hero{
+  min-height:100vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  text-align:center;padding:70px 20px 130px;
+  background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(201,168,76,.09) 0%,transparent 70%),
+  radial-gradient(ellipse 60% 40% at 50% 100%,rgba(155,58,82,.07) 0%,transparent 70%),var(--bg);
+}
+.hb{position:absolute;inset:12px;border:1px solid rgba(201,168,76,.15);pointer-events:none;z-index:0}
+.hb::before{content:'';position:absolute;inset:6px;border:1px solid rgba(201,168,76,.06)}
+.co{position:absolute;width:40px;height:40px;z-index:2;pointer-events:none}
+.co svg{width:100%;height:100%}
+.co.tl{top:16px;left:16px}.co.tr{top:16px;right:16px;transform:scaleX(-1)}
+.co.bl{bottom:16px;left:16px;transform:scaleY(-1)}.co.br{bottom:16px;right:16px;transform:scale(-1,-1)}
+
+.gw{margin-bottom:14px;opacity:0;animation:fD .8s ease forwards .3s}
+.sl{font-family:var(--serif);font-style:italic;font-size:clamp(11px,2.5vw,13px);color:var(--gold);letter-spacing:.5px;line-height:2;max-width:340px;margin:0 auto 24px;opacity:0;animation:fD .8s ease forwards .55s}
+.hi{font-size:clamp(7.5px,1.8vw,9px);letter-spacing:3px;text-transform:uppercase;color:rgba(245,230,184,.45);margin-bottom:20px;line-height:2;opacity:0;animation:fD .7s ease forwards .8s;padding:0 10px}
+.hn{font-family:var(--script);color:var(--gold-l);text-shadow:0 0 40px rgba(201,168,76,.35);line-height:1.05;opacity:0;animation:fD .9s ease forwards 1s}
+.nb{display:flex;flex-direction:column;align-items:center}
+.nm{font-size:clamp(52px,13vw,84px)}
+.nt{font-family:var(--serif);font-style:italic;font-size:clamp(11px,2.5vw,13px);letter-spacing:2px;color:rgba(245,230,184,.5);margin-top:-2px}
+.ar{display:flex;align-items:center;gap:12px;justify-content:center;margin:6px 0}
+.al{flex:1;max-width:70px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.am{font-family:var(--serif);font-style:italic;font-size:18px;color:var(--gold);letter-spacing:4px}
+.fb{
+  margin-top:26px;max-width:480px;width:100%;
+  font-family:var(--serif);font-size:clamp(13px,3vw,15px);font-weight:300;
+  color:rgba(245,230,184,.65);line-height:1.9;
+  opacity:0;animation:fD .8s ease forwards 1.35s;padding:0 10px;
+}
+.pn{font-family:var(--serif);font-size:clamp(15px,3.5vw,18px);font-weight:600;color:var(--cream);letter-spacing:.8px;display:block;margin-top:12px}
+.ps{font-size:clamp(10.5px,2.5vw,12px);display:block;color:rgba(245,230,184,.42)}
+.pp{display:block;font-family:var(--script);font-size:34px;color:var(--gold);margin:4px 0}
+
+/* ─── SCROLL DOWN ─── */
+.scroll-down{
+  position:absolute;bottom:28px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+  opacity:0;animation:fI 1s ease forwards 2.1s;cursor:pointer;text-decoration:none;
+}
+.scroll-down span{font-size:7px;letter-spacing:4px;text-transform:uppercase;color:rgba(201,168,76,.6)}
+.scroll-chevrons{display:flex;flex-direction:column;align-items:center;gap:2px}
+.scroll-chevrons i{
+  display:block;width:16px;height:16px;
+  border-right:1.5px solid var(--gold);border-bottom:1.5px solid var(--gold);
+  transform:rotate(45deg);animation:chevronDrop 1.6s ease-in-out infinite;opacity:0;
+}
+.scroll-chevrons i:nth-child(1){animation-delay:0s}
+.scroll-chevrons i:nth-child(2){animation-delay:.2s}
+.scroll-chevrons i:nth-child(3){animation-delay:.4s}
+@keyframes chevronDrop{
+  0%{opacity:0;transform:rotate(45deg) translate(-4px,-4px)}
+  50%{opacity:1}
+  100%{opacity:0;transform:rotate(45deg) translate(4px,4px)}
+}
+
+/* ─── FLORAL DIVIDER ─── */
+.fd{width:100%;height:52px;display:flex;align-items:center;justify-content:center;position:relative;z-index:1;overflow:hidden}
+.fd svg{width:min(440px,100%)}
+
+/* ─── SHARED SECTION STYLES ─── */
+.st{font-size:clamp(7px,2vw,8px);letter-spacing:5px;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:8px}
+.sh2{font-family:var(--serif);font-size:clamp(24px,6vw,40px);font-weight:300;color:var(--cream);margin-bottom:6px}
+.ss{font-size:clamp(10px,2.5vw,11px);letter-spacing:1.5px;color:rgba(245,230,184,.4);margin-bottom:34px;padding:0 10px}
+.dl{display:flex;align-items:center;gap:12px;justify-content:center;margin-bottom:32px}
+.dl span{width:60px;height:1px;background:linear-gradient(90deg,transparent,var(--gold))}
+.dl span:last-child{background:linear-gradient(270deg,transparent,var(--gold))}
+.dl i{width:5px;height:5px;background:var(--gold);transform:rotate(45deg);box-shadow:0 0 5px var(--gold)}
+.tc{text-align:center}
+
+/* ─── COUNTDOWN ─── */
+#cd{padding:68px 20px;text-align:center;background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 100%)}
+.dt{font-family:var(--serif);font-size:clamp(15px,4vw,18px);font-style:italic;color:var(--gold-p);letter-spacing:2px;margin-bottom:30px}
+.tm{display:flex;justify-content:center;gap:clamp(10px,3vw,36px);flex-wrap:wrap;align-items:center}
+.tb{display:flex;flex-direction:column;align-items:center;min-width:58px}
+.tn{font-family:var(--serif);font-size:clamp(36px,9vw,62px);font-weight:300;line-height:1;background:linear-gradient(180deg,var(--gold-l),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.tl2{font-size:clamp(6px,1.5vw,7px);letter-spacing:4px;text-transform:uppercase;color:rgba(245,230,184,.4);margin-top:4px}
+.tsep{font-family:var(--serif);font-size:clamp(26px,6vw,34px);color:var(--gold);opacity:.35;padding-bottom:12px}
+
+/* ─── MOMENTS ─── */
+#mo{padding:68px 20px;background:var(--bg2)}
+.mg{max-width:860px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+@media(max-width:560px){.mg{grid-template-columns:1fr;max-width:360px}}
+.mc{position:relative;overflow:hidden;aspect-ratio:3/4;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.mc::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.65));z-index:1}
+.mc:hover .mov{opacity:1}
+.mov{position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;background:rgba(201,168,76,.07);transition:opacity .4s;opacity:0}
+.mp{font-family:var(--script);font-size:18px;color:rgba(201,168,76,.3);position:absolute;z-index:1;text-align:center;padding:12px}
+.mcap{text-align:center;margin-top:20px;font-family:var(--serif);font-style:italic;font-size:clamp(14px,3.5vw,16px);color:rgba(245,230,184,.45)}
+
+/* ─── VENUE ─── */
+#ve{padding:68px 20px;background:linear-gradient(180deg,var(--bg2),var(--bg3))}
+.vc{max-width:640px;margin:0 auto;border:1px solid rgba(201,168,76,.2);overflow:hidden}
+.vi{position:relative;height:clamp(200px,40vw,270px);overflow:hidden;background:#1a0c10}
+.vio{position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(15,6,8,.9))}
+.vl{position:absolute;bottom:16px;left:0;right:0;text-align:center;font-family:var(--script);font-size:clamp(26px,6vw,34px);color:var(--gold-l);text-shadow:0 2px 20px rgba(0,0,0,.8)}
+.vn{background:linear-gradient(135deg,rgba(26,12,8,.96),rgba(20,8,10,.96));padding:clamp(20px,5vw,30px) clamp(20px,5vw,34px);text-align:center;border-top:1px solid rgba(201,168,76,.15)}
+.vn h3{font-family:var(--serif);font-size:clamp(18px,4.5vw,22px);color:var(--cream);margin-bottom:6px}
+.vn address{font-style:normal;font-size:clamp(10.5px,2.5vw,11.5px);color:rgba(245,230,184,.5);line-height:1.9;margin-bottom:16px}
+.vb{display:inline-block;padding:10px 24px;border:1px solid var(--gold);color:var(--gold);font-size:clamp(7.5px,2vw,8px);letter-spacing:3px;text-transform:uppercase;text-decoration:none;transition:all .3s}
+.vb:hover{background:var(--gold);color:var(--bg)}
+
+/* ─── CEREMONY ─── */
+#ce{padding:68px 20px;background:var(--bg3)}
+.cw{max-width:720px;margin:0 auto}
+.cc{position:relative;border:1px solid rgba(201,168,76,.22);background:linear-gradient(135deg,rgba(28,14,8,.96),rgba(18,8,12,.96));overflow:hidden}
+.cc::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.ci{display:grid;grid-template-columns:1fr 1fr;min-height:220px}
+@media(max-width:520px){.ci{grid-template-columns:1fr}}
+.ct{padding:clamp(22px,5vw,34px) clamp(18px,5vw,30px);display:flex;flex-direction:column;justify-content:center}
+.cn{font-size:clamp(6.5px,1.8vw,7px);letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.cna{font-family:var(--serif);font-size:clamp(22px,5.5vw,27px);font-weight:300;color:var(--cream);margin-bottom:12px;line-height:1.25}
+.cd{font-size:clamp(10.5px,2.5vw,11.5px);color:rgba(245,230,184,.55);line-height:2}
+.cd span{display:block}.cd strong{color:var(--gold-p)}
+
+/* ─── RING ANIMATION CONTAINER ─── */
+.cv{
+  position:relative;overflow:hidden;
+  min-height:200px;
+  background:linear-gradient(135deg,#2a1208 0%,#1a0c14 100%);
+  display:flex;align-items:center;justify-content:center;
+  padding:20px;
+}
+.ring-wrap{
+  position:relative;
+  width:clamp(120px,30vw,160px);
+  height:clamp(120px,30vw,160px);
+  flex-shrink:0;
+}
+@keyframes rF{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-9px) rotate(4deg)}}
+
+/* highlights strip */
+.hstrip{margin-top:18px;display:grid;grid-template-columns:repeat(3,1fr);border:1px solid rgba(201,168,76,.15);overflow:hidden}
+.hitem{padding:clamp(14px,4vw,22px) 12px;text-align:center}
+.hitem:not(:last-child){border-right:1px solid rgba(201,168,76,.12)}
+.hitem .icon{font-size:clamp(18px,4vw,22px);margin-bottom:6px}
+.hitem .label{font-size:clamp(6.5px,1.8vw,8px);letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
+.hitem .val{font-family:var(--serif);font-size:clamp(11px,3vw,13px);color:var(--cream)}
+
+/* ─── RSVP ─── */
+#rv{padding:68px 20px 88px;background:linear-gradient(180deg,var(--bg3),var(--bg))}
+.rw{max-width:560px;margin:0 auto;width:100%}
+.fg{margin-bottom:20px}
+.fl{display:block;font-size:clamp(7px,1.8vw,8px);letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.fi,.fta{width:100%;background:rgba(201,168,76,.04);border:1px solid rgba(201,168,76,.2);color:var(--cream);font-family:var(--sans);font-size:clamp(12px,3vw,13px);padding:12px 14px;outline:none;transition:border .3s;font-weight:300;-webkit-appearance:none;border-radius:0}
+.fi:focus,.fta:focus{border-color:rgba(201,168,76,.45)}
+.fta{resize:none;height:86px}
+.pills{display:flex;flex-wrap:wrap;gap:8px}
+.pill{padding:8px 16px;border:1px solid rgba(201,168,76,.22);color:rgba(245,230,184,.6);font-size:clamp(10px,2.5vw,11px);font-family:var(--sans);cursor:pointer;transition:all .25s;background:transparent;font-weight:300;-webkit-appearance:none;border-radius:0}
+.pill:hover,.pill.active{background:var(--gold);color:var(--bg);border-color:var(--gold)}
+.rg{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:440px){.rg{grid-template-columns:1fr}}
+.sb{width:100%;padding:15px;margin-top:6px;background:linear-gradient(135deg,var(--gold),var(--gold-l));color:var(--bg);font-family:var(--sans);font-size:clamp(8px,2vw,9px);letter-spacing:4px;text-transform:uppercase;font-weight:500;border:none;cursor:pointer;transition:opacity .3s;-webkit-appearance:none;border-radius:0}
+.sb:hover{opacity:.85}
+.sm{display:none;text-align:center;padding:40px 20px;font-family:var(--script);font-size:clamp(26px,7vw,32px);color:var(--gold)}
+
+/* ─── FOOTER ─── */
+#ft{background:var(--bg);border-top:1px solid rgba(201,168,76,.1);padding:52px 20px 36px;text-align:center}
+.fn{font-family:var(--script);font-size:clamp(36px,10vw,50px);color:var(--gold-l);text-shadow:0 0 28px rgba(201,168,76,.3);margin-bottom:4px}
+.fh{font-size:18px;color:var(--rose);display:block;margin:8px 0}
+.fd2{font-size:clamp(9px,2.5vw,10px);letter-spacing:1.5px;color:rgba(245,230,184,.28);margin-bottom:10px}
+.fbr{font-size:clamp(8.5px,2.5vw,9.5px);color:rgba(201,168,76,.3);letter-spacing:.8px}
+.fbr a{color:var(--gold);text-decoration:none;opacity:.55}
+
+/* ─── ANIMATIONS ─── */
+@keyframes fD{from{opacity:0;transform:translateY(-16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fI{from{opacity:0}to{opacity:1}}
+.rv2{opacity:0;transform:translateY(22px);transition:opacity .75s ease,transform .75s ease}
+.rv2.visible{opacity:1;transform:none}
+.cc{opacity:0;transform:translateY(28px);transition:all .7s ease}
+.cc.visible{opacity:1;transform:translateY(0)}
+
+/* ─── MOBILE SPECIFIC ─── */
+@media(max-width:480px){
+  #hero{padding:60px 16px 110px}
+  .hb{inset:8px}
+  .co{width:32px;height:32px}.co.tl{top:12px;left:12px}.co.tr{top:12px;right:12px}.co.bl{bottom:12px;left:12px}.co.br{bottom:12px;right:12px}
+  .ci{grid-template-columns:1fr}
+  .cv{min-height:180px}
+  .hstrip{grid-template-columns:1fr}
+  .hitem:not(:last-child){border-right:none;border-bottom:1px solid rgba(201,168,76,.12)}
+  .music-btn{width:44px;height:44px;bottom:20px;right:16px}
+  .music-toast{right:16px;bottom:72px;font-size:9px}
+}
+@media(max-width:360px){
+  .nm{font-size:44px}
+}
+</style>
+</head>
+<body>
+
+<!-- ░░ HTML5 AUDIO PLAYER ░░ -->
+<audio id="audioPlayer" preload="auto">
+  <source src="https://s3.ustatik.com/audio.com.audio/transcoding/04/13/1828635230011304-1828635230104422-1828635234892727.mp3?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=F0E8U41NBMMW3Y027UTJ%2F20260504%2Feu-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260504T174847Z&X-Amz-SignedHeaders=host&X-Amz-Expires=518400&X-Amz-Signature=2f5359ce2fb438f32be8e03c0cd9ac5ec3aee377a4b1fbd6a5b011f1eca90000" type="audio/mpeg">
+</audio>
+
+<!-- ░░ FLOATING MUSIC BUTTON ░░ -->
+<button class="music-btn" id="musicBtn" aria-label="Play music" title="Play Wedding Song">
+  <svg id="ico-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+  <svg id="ico-pause" viewBox="0 0 24 24" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+</button>
+<div class="music-toast" id="musicToast">♪ Playing Wedding Song</div>
+
+<!-- ░░ PARTICLES ░░ -->
+<canvas id="particles"></canvas>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section id="hero">
+  <div class="hb"></div>
+  <div class="co tl"><svg viewBox="0 0 46 46" fill="none"><path d="M2 44V2H44" stroke="#C9A84C" stroke-width="1.2" opacity=".7"/><path d="M2 2Q20 20 2 36" stroke="#C9A84C" stroke-width=".65"/><circle cx="2" cy="2" r="2.5" fill="#C9A84C" opacity=".8"/><circle cx="23" cy="2" r="1.2" fill="#C9A84C" opacity=".3"/><circle cx="2" cy="23" r="1.2" fill="#C9A84C" opacity=".3"/></svg></div>
+  <div class="co tr"><svg viewBox="0 0 46 46" fill="none"><path d="M2 44V2H44" stroke="#C9A84C" stroke-width="1.2" opacity=".7"/><path d="M2 2Q20 20 2 36" stroke="#C9A84C" stroke-width=".65"/><circle cx="2" cy="2" r="2.5" fill="#C9A84C" opacity=".8"/><circle cx="23" cy="2" r="1.2" fill="#C9A84C" opacity=".3"/><circle cx="2" cy="23" r="1.2" fill="#C9A84C" opacity=".3"/></svg></div>
+  <div class="co bl"><svg viewBox="0 0 46 46" fill="none"><path d="M2 44V2H44" stroke="#C9A84C" stroke-width="1.2" opacity=".7"/><path d="M2 2Q20 20 2 36" stroke="#C9A84C" stroke-width=".65"/><circle cx="2" cy="2" r="2.5" fill="#C9A84C" opacity=".8"/></svg></div>
+  <div class="co br"><svg viewBox="0 0 46 46" fill="none"><path d="M2 44V2H44" stroke="#C9A84C" stroke-width="1.2" opacity=".7"/><path d="M2 2Q20 20 2 36" stroke="#C9A84C" stroke-width=".65"/><circle cx="2" cy="2" r="2.5" fill="#C9A84C" opacity=".8"/></svg></div>
+
+  <!-- Jai Guru Ji -->
+  <div style="opacity:0;animation:fD .8s ease forwards .1s;margin-bottom:10px;text-align:center">
+    <p style="font-family:'Great Vibes',cursive;font-size:clamp(28px,7vw,42px);color:var(--gold-l);text-shadow:0 0 24px rgba(201,168,76,.5);letter-spacing:2px;line-height:1.2">Jai Guru Ji</p>
+    <div style="display:flex;align-items:center;gap:10px;justify-content:center;margin-top:4px">
+      <span style="width:40px;height:1px;background:linear-gradient(90deg,transparent,var(--gold))"></span>
+      <span style="width:5px;height:5px;background:var(--gold);transform:rotate(45deg);display:inline-block;box-shadow:0 0 5px var(--gold)"></span>
+      <span style="width:40px;height:1px;background:linear-gradient(270deg,transparent,var(--gold))"></span>
+    </div>
+  </div>
+
+  <!-- Ganesh -->
+  <div class="gw">
+    <svg width="56" height="70" viewBox="0 0 58 72" fill="none" style="filter:drop-shadow(0 0 12px rgba(201,168,76,.45))">
+      <ellipse cx="29" cy="27" rx="19" ry="21" fill="rgba(201,168,76,.12)" stroke="#C9A84C" stroke-width=".8"/>
+      <ellipse cx="29" cy="23" rx="11" ry="13" fill="rgba(201,168,76,.08)"/>
+      <path d="M29 33 Q22 42 26 48 Q30 54 23 56" stroke="#C9A84C" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+      <ellipse cx="12" cy="23" rx="7.5" ry="11" fill="rgba(201,168,76,.08)" stroke="#C9A84C" stroke-width=".6"/>
+      <ellipse cx="46" cy="23" rx="7.5" ry="11" fill="rgba(201,168,76,.08)" stroke="#C9A84C" stroke-width=".6"/>
+      <circle cx="23" cy="21" r="1.5" fill="#C9A84C"/><circle cx="35" cy="21" r="1.5" fill="#C9A84C"/>
+      <path d="M19 10 L23 4 L29 8 L35 4 L39 10" stroke="#C9A84C" stroke-width=".8" fill="none"/>
+      <ellipse cx="29" cy="56" rx="15" ry="10" fill="rgba(201,168,76,.07)" stroke="#C9A84C" stroke-width=".4"/>
+      <line x1="29" y1="12" x2="29" y2="17" stroke="#C9A84C" stroke-width="1.5"/>
+      <circle cx="29" cy="19" r="1.2" fill="#C9A84C" opacity=".5"/>
+    </svg>
+  </div>
+
+  <p class="sl">वक्रतुण्ड महाकाय सूर्यकोटि समप्रभ<br/>निर्विघ्नं कुरु मे देव सर्वकार्येषु सर्वदा</p>
+
+  <p class="hi">With the blessings of the Almighty &amp; our respected elders,<br/>we joyfully request your gracious presence at the<br/><strong style="color:var(--gold-p);letter-spacing:4px;font-weight:400">Ring Ceremony</strong></p>
+
+  <!-- BRIDE FIRST, then GROOM -->
+  <div class="hn">
+    <div class="nb">
+      <span class="nm">Akansha</span>
+      <span class="nt">Dr. Akansha Grover</span>
+    </div>
+    <div class="ar"><div class="al"></div><div class="am">&amp;</div><div class="al"></div></div>
+    <div class="nb">
+      <span class="nm">Aashray</span>
+      <span class="nt">Mr. Aashray Sharma</span>
+    </div>
+  </div>
+
+  <div class="fb">
+    <span class="pn">Dr. Akansha Grover</span>
+    <span>Daughter of Mr. Grover &amp; Mrs. Grover</span>
+    <span class="pp">&amp;</span>
+    <span class="pn">Mr. Aashray Sharma</span>
+    <span>Son of Mr. Sharma &amp; Mrs. Sharma</span>
+  </div>
+
+  <a class="scroll-down" href="#cd" aria-label="Scroll down">
+    <span>Scroll</span>
+    <div class="scroll-chevrons"><i></i><i></i><i></i></div>
+  </a>
+</section>
+
+<!-- FLORAL -->
+<div class="fd"><svg viewBox="0 0 440 52" fill="none"><path d="M20 26 Q110 6 220 26 Q330 46 420 26" stroke="#C9A84C" stroke-width=".8"/><path d="M20 26 Q110 46 220 26 Q330 6 420 26" stroke="#C9A84C" stroke-width=".8" opacity=".3"/><g transform="translate(220,26)"><circle r="4" fill="#C9A84C"/><circle r="7.5" fill="none" stroke="#C9A84C" stroke-width=".5"/></g><g transform="translate(95,18)"><circle r="2.2" fill="#C9A84C" opacity=".4"/></g><g transform="translate(345,34)"><circle r="2.2" fill="#C9A84C" opacity=".4"/></g></svg></div>
+
+<!-- ═══════════ COUNTDOWN ═══════════ -->
+<section id="cd">
+  <span class="st rv2">The Big Day</span>
+  <h2 class="sh2 rv2">A Celebration of Love</h2>
+  <p class="ss rv2">The start of a beautiful journey, shared with the ones we love most</p>
+  <div class="dl rv2"><span></span><i></i><span></span></div>
+  <p class="dt rv2">Saturday · 20th June 2026</p>
+  <div class="tm rv2">
+    <div class="tb"><span class="tn" id="t-d">00</span><span class="tl2">Days</span></div>
+    <div class="tsep">:</div>
+    <div class="tb"><span class="tn" id="t-h">00</span><span class="tl2">Hours</span></div>
+    <div class="tsep">:</div>
+    <div class="tb"><span class="tn" id="t-m">00</span><span class="tl2">Mins</span></div>
+    <div class="tsep">:</div>
+    <div class="tb"><span class="tn" id="t-s">00</span><span class="tl2">Secs</span></div>
+  </div>
+</section>
+
+<!-- FLORAL -->
+<div class="fd"><svg viewBox="0 0 440 52" fill="none"><line x1="0" y1="26" x2="440" y2="26" stroke="#C9A84C" stroke-width=".35" opacity=".25"/><g transform="translate(80,26)"><line x1="-6" y1="0" x2="6" y2="0" stroke="#C9A84C" stroke-width=".8"/><line x1="0" y1="-6" x2="0" y2="6" stroke="#C9A84C" stroke-width=".8"/></g><g transform="translate(220,26)"><rect x="-5" y="-5" width="10" height="10" fill="#C9A84C" transform="rotate(45)" opacity=".85"/></g><g transform="translate(360,26)"><line x1="-6" y1="0" x2="6" y2="0" stroke="#C9A84C" stroke-width=".8"/><line x1="0" y1="-6" x2="0" y2="6" stroke="#C9A84C" stroke-width=".8"/></g></svg></div>
+
+<!-- ═══════════ MOMENTS ═══════════ -->
+<section id="mo">
+  <div class="tc" style="margin-bottom:32px">
+    <span class="st rv2">A Glimpse of Us</span>
+    <h2 class="sh2 rv2">Our Beautiful Moments</h2>
+    <div class="dl rv2"><span></span><i></i><span></span></div>
+  </div>
+  <div class="mg rv2">
+    <div class="mc" style="background:linear-gradient(135deg,#2a1520,#180c14)"><img src="groom.png" alt="Groom" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center"/><div class="mp">A moment<br/>captured in time</div><div class="mov"><svg width="36" height="36" viewBox="0 0 36 36" fill="none"><circle cx="18" cy="18" r="16" stroke="rgba(201,168,76,.8)" stroke-width="1"/><polygon points="14,11 27,18 14,25" fill="rgba(201,168,76,.8)"/></svg></div></div>
+    <div class="mc" style="background:linear-gradient(135deg,#1a0c14,#2a1520)"><img src="pic1.jpg" alt="Our Moment" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center"/><div class="mp">Forever in<br/>our hearts</div><div class="mov"><svg width="36" height="36" viewBox="0 0 36 36" fill="none"><circle cx="18" cy="18" r="16" stroke="rgba(201,168,76,.8)" stroke-width="1"/><polygon points="14,11 27,18 14,25" fill="rgba(201,168,76,.8)"/></svg></div></div>
+    <div class="mc" style="background:linear-gradient(135deg,#221208,#1a1518)"><img src="bride.png" alt="Bride" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center"/><div class="mp">Written in<br/>the stars</div><div class="mov"><svg width="36" height="36" viewBox="0 0 36 36" fill="none"><circle cx="18" cy="18" r="16" stroke="rgba(201,168,76,.8)" stroke-width="1"/><polygon points="14,11 27,18 14,25" fill="rgba(201,168,76,.8)"/></svg></div></div>
+  </div>
+  <p class="mcap rv2" style="transition-delay:.2s">A moment captured in time, forever in our hearts</p>
+</section>
+
+<!-- FLORAL -->
+<div class="fd"><svg viewBox="0 0 440 52" fill="none"><path d="M40 26 Q220 4 400 26" stroke="#C9A84C" stroke-width=".6" opacity=".4"/><path d="M40 26 Q220 48 400 26" stroke="#C9A84C" stroke-width=".6" opacity=".2"/><g transform="translate(220,26)"><circle r="2.5" fill="none" stroke="#C9A84C" stroke-width=".8"/><circle r="1.2" fill="#C9A84C"/></g></svg></div>
+
+<!-- ═══════════ VENUE ═══════════ -->
+<section id="ve">
+  <div class="tc" style="margin-bottom:32px">
+    <span class="st rv2">Where Love Awaits</span>
+    <h2 class="sh2 rv2">Our Cherished Venue</h2>
+    <div class="dl rv2"><span></span><i></i><span></span></div>
+  </div>
+  <div class="vc rv2">
+    <div class="vi">
+      <svg width="100%" height="100%" viewBox="0 0 660 270" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" style="position:absolute;inset:0">
+        <defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1a0c14"/><stop offset="100%" stop-color="#0f0608"/></linearGradient><radialGradient id="mg2" cx="50%" cy="25%" r="35%"><stop offset="0%" stop-color="rgba(201,168,76,.1)"/><stop offset="100%" stop-color="transparent"/></radialGradient></defs>
+        <rect width="660" height="270" fill="url(#sky)"/><rect width="660" height="270" fill="url(#mg2)"/>
+        <circle cx="70" cy="28" r=".9" fill="#E8CC7A" opacity=".6"/><circle cx="190" cy="18" r=".7" fill="#E8CC7A" opacity=".4"/><circle cx="340" cy="12" r="1.1" fill="#E8CC7A" opacity=".55"/><circle cx="490" cy="22" r=".8" fill="#E8CC7A" opacity=".5"/><circle cx="610" cy="16" r=".9" fill="#E8CC7A" opacity=".4"/><circle cx="430" cy="42" r=".7" fill="#E8CC7A" opacity=".45"/>
+        <circle cx="570" cy="48" r="20" fill="rgba(245,230,184,.07)" stroke="rgba(201,168,76,.18)" stroke-width=".7"/><circle cx="582" cy="42" r="16" fill="#0f0608"/>
+        <rect x="90" y="145" width="480" height="80" fill="rgba(201,168,76,.06)" stroke="rgba(201,168,76,.18)" stroke-width=".6"/>
+        <rect x="118" y="150" width="7" height="75" fill="rgba(201,168,76,.14)"/><rect x="152" y="150" width="7" height="75" fill="rgba(201,168,76,.14)"/><rect x="186" y="150" width="7" height="75" fill="rgba(201,168,76,.14)"/><rect x="467" y="150" width="7" height="75" fill="rgba(201,168,76,.14)"/><rect x="501" y="150" width="7" height="75" fill="rgba(201,168,76,.14)"/><rect x="535" y="150" width="7" height="75" fill="rgba(201,168,76,.14)"/>
+        <path d="M296 225 L296 182 Q296 162 316 157 Q326 152 330 152 Q340 152 350 157 Q364 162 364 182 L364 225Z" fill="rgba(201,168,76,.1)" stroke="rgba(201,168,76,.28)" stroke-width=".8"/>
+        <ellipse cx="330" cy="136" rx="52" ry="28" fill="rgba(201,168,76,.09)" stroke="rgba(201,168,76,.22)" stroke-width=".8"/>
+        <ellipse cx="330" cy="136" rx="38" ry="20" fill="rgba(201,168,76,.07)"/>
+        <line x1="330" y1="108" x2="330" y2="88" stroke="#C9A84C" stroke-width="1.1"/><polygon points="330,84 326,95 334,95" fill="#C9A84C" opacity=".65"/>
+        <rect x="98" y="116" width="48" height="29" fill="rgba(201,168,76,.07)" stroke="rgba(201,168,76,.18)" stroke-width=".5"/><path d="M98 116 L122 97 L146 116Z" fill="rgba(201,168,76,.09)" stroke="rgba(201,168,76,.18)" stroke-width=".5"/>
+        <rect x="514" y="116" width="48" height="29" fill="rgba(201,168,76,.07)" stroke="rgba(201,168,76,.18)" stroke-width=".5"/><path d="M514 116 L538 97 L562 116Z" fill="rgba(201,168,76,.09)" stroke="rgba(201,168,76,.18)" stroke-width=".5"/>
+        <rect x="78" y="225" width="504" height="7" fill="rgba(201,168,76,.12)" rx="1"/><rect x="60" y="232" width="540" height="7" fill="rgba(201,168,76,.09)" rx="1"/>
+        <circle cx="152" cy="242" r="2.5" fill="rgba(201,168,76,.5)"/><circle cx="210" cy="242" r="2.5" fill="rgba(201,168,76,.5)"/><circle cx="270" cy="242" r="2.5" fill="rgba(201,168,76,.5)"/><circle cx="330" cy="242" r="3" fill="rgba(201,168,76,.6)"/><circle cx="390" cy="242" r="2.5" fill="rgba(201,168,76,.5)"/><circle cx="450" cy="242" r="2.5" fill="rgba(201,168,76,.5)"/><circle cx="510" cy="242" r="2.5" fill="rgba(201,168,76,.5)"/>
+        <line x1="65" y1="196" x2="65" y2="232" stroke="rgba(90,65,25,.5)" stroke-width="2"/><ellipse cx="65" cy="194" rx="14" ry="20" fill="rgba(60,80,40,.3)"/>
+        <line x1="595" y1="196" x2="595" y2="232" stroke="rgba(90,65,25,.5)" stroke-width="2"/><ellipse cx="595" cy="194" rx="14" ry="20" fill="rgba(60,80,40,.3)"/>
+        <rect x="0" y="200" width="660" height="70" fill="url(#sky)" opacity=".85"/>
+        <text x="330" y="200" text-anchor="middle" font-family="serif" font-size="10" fill="rgba(201,168,76,.22)" letter-spacing="4">REGENTA CENTRAL CASSIA</text>
+      </svg>
+      <div class="vio"></div>
+      <div class="vl">Regenta Central Cassia</div>
+    </div>
+    <div class="vn">
+      <h3>Regenta Central Cassia</h3>
+      <address>Patiala Road, Green Enclave, Lohgarh<br/>Zirakpur, Punjab — 140 603</address>
+      <a class="vb" href="https://www.google.com/maps/search/?api=1&query=Regenta+Central+Cassia+Zirakpur+Punjab" target="_blank">Get Directions</a>
+    </div>
+  </div>
+</section>
+
+<!-- FLORAL -->
+<div class="fd"><svg viewBox="0 0 440 52" fill="none"><g transform="translate(80,26)"><circle cx="0" cy="-8" r="4" fill="rgba(232,196,184,.55)"/><circle cx="7" cy="-4" r="4" fill="rgba(232,196,184,.55)"/><circle cx="7" cy="4" r="4" fill="rgba(232,196,184,.55)"/><circle cx="0" cy="8" r="4" fill="rgba(232,196,184,.55)"/><circle cx="-7" cy="4" r="4" fill="rgba(232,196,184,.55)"/><circle cx="-7" cy="-4" r="4" fill="rgba(232,196,184,.55)"/><circle cx="0" cy="0" r="4" fill="#C9A84C"/></g><line x1="106" y1="26" x2="200" y2="26" stroke="#C9A84C" stroke-width=".5" opacity=".35"/><g transform="translate(220,26)"><rect x="-5" y="-5" width="10" height="10" fill="#C9A84C" transform="rotate(45)"/></g><line x1="240" y1="26" x2="334" y2="26" stroke="#C9A84C" stroke-width=".5" opacity=".35"/><g transform="translate(360,26)"><circle cx="0" cy="-8" r="4" fill="rgba(232,196,184,.55)"/><circle cx="7" cy="-4" r="4" fill="rgba(232,196,184,.55)"/><circle cx="7" cy="4" r="4" fill="rgba(232,196,184,.55)"/><circle cx="0" cy="8" r="4" fill="rgba(232,196,184,.55)"/><circle cx="-7" cy="4" r="4" fill="rgba(232,196,184,.55)"/><circle cx="-7" cy="-4" r="4" fill="rgba(232,196,184,.55)"/><circle cx="0" cy="0" r="4" fill="#C9A84C"/></g></svg></div>
+
+<!-- ═══════════ CEREMONY ═══════════ -->
+<section id="ce">
+  <div class="tc" style="margin-bottom:36px">
+    <span class="st rv2">The Sacred Occasion</span>
+    <h2 class="sh2 rv2">The Ring Ceremony</h2>
+    <div class="dl rv2"><span></span><i></i><span></span></div>
+  </div>
+  <div class="cw">
+    <div class="cc">
+      <div class="ci">
+        <!-- TEXT DETAILS -->
+        <div class="ct">
+          <span class="cn">Shagun &amp; Shades</span>
+          <h3 class="cna">Ring Ceremony<br/><em style="font-size:clamp(13px,3.5vw,15px);color:var(--gold);font-style:italic;font-family:var(--serif)">Akansha &amp; Aashray</em></h3>
+          <div class="cd">
+            <span><strong>Date</strong> Saturday, 20th June 2026</span>
+            <span><strong>Time</strong> 7:00 PM onwards</span>
+            <span><strong>Venue</strong> Regenta Central Cassia</span>
+            <span><strong>Address</strong> Patiala Rd, Green Enclave, Zirakpur</span>
+          </div>
+        </div>
+        <!-- RING ANIMATION — fixed responsive container -->
+        <div class="cv">
+          <div class="ring-wrap">
+            <!-- Outer glow -->
+            <div style="position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,.07),transparent 65%)"></div>
+            <!-- Orbit ring -->
+            <div style="position:absolute;inset:0;border-radius:50%;border:.5px solid rgba(201,168,76,.15);animation:rF 4s ease-in-out infinite"></div>
+            <!-- Ring 1 (bride) — gold, gem on top -->
+            <div style="
+              position:absolute;
+              width:55%;height:55%;
+              border-radius:50%;
+              border:4px solid #C9A84C;
+              left:8%;top:22%;
+              box-shadow:0 0 18px rgba(201,168,76,.38);
+              animation:rF 3s ease-in-out infinite;
+            ">
+              <div style="position:absolute;width:11px;height:11px;background:radial-gradient(circle at 35% 35%,#fff,#fce8f0,#c0406a);border:1.5px solid #C9A84C;border-radius:2px;top:-7px;left:50%;transform:translateX(-50%) rotate(45deg);box-shadow:0 0 8px rgba(192,64,106,.65)"></div>
+            </div>
+            <!-- Ring 2 (groom) — light gold, gem on bottom -->
+            <div style="
+              position:absolute;
+              width:55%;height:55%;
+              border-radius:50%;
+              border:4px solid #E8CC7A;
+              left:37%;top:22%;
+              box-shadow:0 0 18px rgba(232,204,122,.28);
+              animation:rF 3s ease-in-out infinite .55s;
+            ">
+              <div style="position:absolute;width:11px;height:11px;background:radial-gradient(circle at 35% 35%,#fff,#d4eef8,#4a90b8);border:1.5px solid #E8CC7A;border-radius:2px;bottom:-7px;left:50%;transform:translateX(-50%) rotate(45deg);box-shadow:0 0 8px rgba(74,144,184,.65)"></div>
+            </div>
+            <!-- Stem -->
+            <div style="position:absolute;bottom:6px;left:50%;transform:translateX(-50%);width:1.5px;height:18px;background:linear-gradient(180deg,rgba(201,168,76,.5),transparent)"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hstrip rv2" style="transition-delay:.15s">
+      <div class="hitem"><div class="icon">💍</div><div class="label">Ceremony</div><div class="val">Ring Exchange</div></div>
+      <div class="hitem"><div class="icon">🌹</div><div class="label">Ambience</div><div class="val">Floral &amp; Lights</div></div>
+      <div class="hitem"><div class="icon">🎶</div><div class="label">Evening</div><div class="val">Music &amp; Dinner</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<section id="ft">
+  <div class="fd" style="margin-bottom:18px;opacity:.35"><svg viewBox="0 0 440 52" fill="none"><path d="M20 26 Q220 4 420 26" stroke="#C9A84C" stroke-width=".7"/><path d="M20 26 Q220 48 420 26" stroke="#C9A84C" stroke-width=".7" opacity=".3"/></svg></div>
+  <div class="fn">Akansha &amp; Aashray</div>
+  <span class="fh">♥</span>
+  <div class="dl" style="margin:20px auto 20px;max-width:160px"><span style="width:40px"></span><i></i><span style="width:40px"></span></div>
+  <div class="fd2">20th June, Saturday 2026 · Regenta Central Cassia, Zirakpur</div>
+</section>
+
+<script>
+/* ── PARTICLES ── */
+const CV=document.getElementById('particles'),CX=CV.getContext('2d');
+function rs(){CV.width=innerWidth;CV.height=innerHeight}rs();window.addEventListener('resize',rs);
+const PS=Array.from({length:200},()=>({x:Math.random(),y:Math.random(),r:Math.random()*.85+.15,a:Math.random()*.65,sp:Math.random()*.003+.0008,ph:Math.random()*Math.PI*2,g:Math.random()>.5}));
+function dp(t){CX.clearRect(0,0,CV.width,CV.height);PS.forEach(p=>{const al=p.a*(.3+.7*Math.sin(t*p.sp*1000+p.ph));CX.beginPath();CX.arc(p.x*CV.width,p.y*CV.height,p.r,0,Math.PI*2);CX.fillStyle=p.g?`rgba(201,168,76,${al})`:`rgba(245,230,184,${al*.45})`;CX.fill()});requestAnimationFrame(dp)}
+requestAnimationFrame(dp);
+
+/* ── COUNTDOWN ── */
+function ut(){
+  const tgt=new Date('2026-06-20T19:00:00+05:30');
+  let d=tgt-new Date();if(d<0)d=0;
+  const dy=Math.floor(d/864e5),h=Math.floor((d%864e5)/36e5),m=Math.floor((d%36e5)/6e4),s=Math.floor((d%6e4)/1e3);
+  document.getElementById('t-d').textContent=String(dy).padStart(2,'0');
+  document.getElementById('t-h').textContent=String(h).padStart(2,'0');
+  document.getElementById('t-m').textContent=String(m).padStart(2,'0');
+  document.getElementById('t-s').textContent=String(s).padStart(2,'0');
+}
+ut();setInterval(ut,1000);
+
+/* ── SCROLL REVEAL ── */
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')}),{threshold:.08});
+document.querySelectorAll('.rv2,.cc').forEach(el=>obs.observe(el));
+
+/* ── HTML5 AUDIO MUSIC PLAYER ── */
+const audioPlayer=document.getElementById('audioPlayer');
+const musicBtn=document.getElementById('musicBtn');
+const icoPlay=document.getElementById('ico-play');
+const icoPause=document.getElementById('ico-pause');
+const toast=document.getElementById('musicToast');
+let isPlaying=false;
+
+function setPlayIcon(){icoPlay.style.display='';icoPause.style.display='none'}
+function setPauseIcon(){icoPlay.style.display='none';icoPause.style.display=''}
+function showToast(txt){
+  toast.textContent=txt;toast.classList.add('show');
+  setTimeout(()=>toast.classList.remove('show'),2800);
+}
+
+// Start time: 3:08 = 188 seconds
+const START_TIME=188;
+let hasUnmuted=false;
+let seekDone=false;
+
+audioPlayer.volume=0.7;
+
+audioPlayer.addEventListener('play',function(){setPauseIcon();isPlaying=true;});
+audioPlayer.addEventListener('pause',function(){setPlayIcon();isPlaying=false;});
+audioPlayer.addEventListener('ended',function(){
+  seekDone=false;
+  audioPlayer.currentTime=START_TIME;
+  audioPlayer.play();
+});
+audioPlayer.addEventListener('error',function(){
+  showToast('♪ Audio loading error');
+  console.error('Audio error:',audioPlayer.error);
+});
+// Seek to START_TIME only AFTER audio is already playing & buffered
+audioPlayer.addEventListener('playing',function(){
+  if(!seekDone){
+    seekDone=true;
+    audioPlayer.currentTime=START_TIME;
+  }
+});
+
+// Muted autoplay on page load (all browsers allow muted autoplay)
+audioPlayer.muted=true;
+audioPlayer.play().then(function(){
+  showToast('♪ Click anywhere to hear music');
+}).catch(function(err){
+  console.log('Autoplay blocked:',err);
+  showToast('♪ Click music button to play');
+});
+
+// Unmute + show toast on first user interaction
+function unmuteAndPlay(){
+  if(!hasUnmuted){
+    hasUnmuted=true;
+    audioPlayer.muted=false;
+    if(audioPlayer.paused){
+      audioPlayer.play().then(function(){
+        showToast('♪ Playing Wedding Song');
+      }).catch(function(){});
+    }else{
+      showToast('♪ Playing Wedding Song');
+    }
+  }
+}
+
+window.addEventListener('click',unmuteAndPlay,{once:true});
+window.addEventListener('touchstart',unmuteAndPlay,{once:true,passive:true});
+window.addEventListener('scroll',unmuteAndPlay,{once:true,passive:true});
+
+// Music button click handler
+musicBtn.addEventListener('click',function(e){
+  e.stopPropagation();
+  // Unmute on first button click too
+  if(audioPlayer.muted){
+    audioPlayer.muted=false;
+    hasUnmuted=true;
+    showToast('♪ Playing Wedding Song');
+  }
+  if(isPlaying){
+    audioPlayer.pause();
+    showToast('♪ Paused');
+  }else{
+    audioPlayer.play().then(function(){
+      if(!audioPlayer.muted) showToast('♪ Playing Wedding Song');
+    }).catch(function(err){
+      console.error('Play error:',err);
+      showToast('♪ Click to play music');
+    });
+  }
+});
+</script>
+</body>
+</html>
